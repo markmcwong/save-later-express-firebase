@@ -1,12 +1,12 @@
 {
   "name": "savelater",
   "version": "1.0.0",
-  "description": "Using latest JavaScript features on the server",
+  "description": "A save later web app using express.js with babel boilerplate",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vmasto/express-babel.git"
+    "url": "git+https://github.com/markmcwong/save-later.git"
   },
-  "author": "Vassilis Mastorostergios <vmasto@gmail.com>",
+  "author": "Mark Wong <markwongmanchun@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "engines": {
