@@ -4,3 +4,37 @@ body
 a
   color: #00B7FF
   font-size: 12px
+
+.ui.left.visible.vertical.sidebar.labeled.menu
+  width: 250px
+  .item
+    font-size: 1em
+    i.icon
+      float: none
+
+.ui.top.fixed.menu,
+  margin-left: -10px
+  width: calc(100% - 247px)
+.left.menu, .ui.left.aligned.search.item
+  width: 100%
+
+.ui.vertical.menu> a.item>.label
+  background-color: rgba(0,0,0,0)
+  color: #7b7b7b
+  //font-size: 0.9em
+
+.ui.top.large.fixed.menu>.ui.secondary.menu, .content
+  position: absolute
+  top: 100%
+
+.ui.fluid.pointing.dropdown.icon.basic.primary.button
+  width: 150px
+  border-radius: 0
+  span
+    text-align: center
+    width: 60%
+  i
+    margin-top: 0.3em !important;
+  .ui.avatar.image
+    width: 1.7em
+    height: 1.7em

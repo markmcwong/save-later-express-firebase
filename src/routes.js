@@ -1,17 +1,19 @@
 import { Router } from 'express';
-
+//import initial from '../model/loadData.js';
 const routes = Router();
 
-import request from 'request';
-request('http://www.google.com', function (error, response, body) {
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was receivedfor the Google homepage.
-});
 /**
  * GET home page
  */
 routes.get('/', (req, res) => {
-  res.render('index', { title: 'Express Babel' });
-});
+  /**initial((result) =>{
+    console.log(result)
+    var test = JSON.stringify(result)
+
+  })*/
+  res.render('index', { title: "test" });
+})
+
 
 /**
  * GET /list

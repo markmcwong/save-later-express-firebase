@@ -3,5 +3,159 @@ html
   head
     title= title
     link(rel='stylesheet', href='/styles/style.css')
+    link(rel='stylesheet', href='semantic/dist/semantic.min.css')
+    script(src='/socket.io/socket.io.js')
+    script(src='https://code.jquery.com/jquery-3.1.1.min.js', integrity='sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=', crossorigin='anonymous')
+    script(src='https://www.gstatic.com/firebasejs/4.1.3/firebase.js')
+    script(src='semantic/dist/semantic.js')
   body
-    block content
+    .ui.large.left.visible.vertical.sidebar.labeled.menu
+      a.active.blue.item
+        i.home.icon
+        .ui.blue.large.left.pointing.label 51
+        |    All Bookmarks
+      a.item
+        i.block.layout.icon
+        .ui.large.label 51
+        |     Unsorted
+      a.item
+        i.smile.icon
+        .ui.large.label 51
+        |     Favourites
+    .ui.top.large.fixed.menu
+      .ui.secondary.menu
+        a.item(value="ag")
+          | #tag1
+        a.item(value="ax")
+          | #tag1
+        block content
+      .left.menu
+        .ui.left.aligned.multiple.search.selection.dropdown.item
+          input(type='hidden', name='country')
+          i.dropdown.icon
+          .default.text Search Bookmarks
+          .menu
+            .item(data-value='af')
+              i.af.flag
+              | Afghanistan
+            .item(data-value='ax')
+              i.ax.flag
+              | Aland Islands
+            .item(data-value='al')
+              i.al.flag
+              | Albania
+            .item(data-value='dz')
+              i.dz.flag
+              | Algeria
+            .item(data-value='as')
+              i.as.flag
+              | American Samoa
+            .item(data-value='ad')
+              i.ad.flag
+              | Andorra
+            .item(data-value='ao')
+              i.ao.flag
+              | Angola
+            .item(data-value='ai')
+              i.ai.flag
+              | Anguilla
+            .item(data-value='ag')
+              i.ag.flag
+              | Antigua
+            .item(data-value='ar')
+              i.ar.flag
+              | Argentina
+            .item(data-value='am')
+              i.am.flag
+              | Armenia
+            .item(data-value='aw')
+              i.aw.flag
+              | Aruba
+          .results
+      .ui.fluid.pointing.dropdown.icon.basic.primary.button
+        img.ui.avatar.image(src="http://via.placeholder.com/350x150")
+        span.text Mark
+        .menu
+          .item
+            i.help.circle.icon
+            | Help
+          .item
+            i.options.icon
+            | Options
+          .divider
+          .header
+            i.user.circle.icon
+            | Logout
+        i.dropdown.icon
+
+    script.
+      $('.ui.dropdown')
+        .dropdown({
+          onRemove: function(removedValue, removedText, $removedChoice) {
+          console.log(removedValue)
+          //$(".ui.secondary.menu").append("<a class='item' value='"+removedValue+"'</a>")
+          $("a.item[value="+removedValue+"]").show();
+        }});
+      $('.ui.secondary.menu').click(function(){
+        $('.ui.left.aligned.multiple.search.selection.dropdown.item')
+        .dropdown('set selected',$(event.target).attr("value"))
+        $(event.target).hide();
+      })
+      //$('.ui.left.aligned.multiple.search.selection.dropdown.item')
+      const config = {
+        apiKey: "AIzaSyAfLAByU2D0xLPaSyOv0kv6rMVXgLPms7Q",
+        authDomain: "save-later.firebaseapp.com",
+        databaseURL: "https://save-later.firebaseio.com",
+        projectId: "save-later",
+        storageBucket: "save-later.appspot.com",
+        messagingSenderId: "474185026898"
+      };
+      firebase.initializeApp(config);
+      var rootRef = firebase.database().ref();
+      rootRef.on("child_added", function(snapshot) {
+        var newPost = snapshot.val();
+        console.log(newPost);
+        var object = snapshot.val()
+        document.getElementById('output').innerHTML = createHTML(object, false);
+      });
+      var usersRef = rootRef.child("Users");
+      usersRef.set({
+        "9NHQzqFyR0gwILDesIGYnrD1ajQ2": {
+          "Collection": {
+              "name" : "test",
+              "id" : "JQzKCKCaxu",
+              "abc" : "JQzKCKCaxu",
+              "Collection": {
+                "name" : "test",
+                "id" : "JQzKCKCaxu",
+                "abc" : "JQzKCKCaxu"
+                }
+              ,
+              "Collection": {
+                "name" : "test",
+                "id" : "JQzKCKCaxu",
+                "abc" : "JQzKCKCaxu"
+              }
+              }
+            }
+
+
+      });
+
+      function createHTML(json, isArray){
+
+         var html = '<ul>';
+         for(var key in json){
+             if(typeof json[key] == 'object'){
+
+                 html += '<div class="ui list">' + (!isArray ? '<strong>'+ key +'</strong>' : '') + '</div>' + createHTML(json[key], (json[key] instanceof Array ? 1 : 0));
+             } else {
+                 html += '<div class="item">'+ json[key] +'</div>';
+             }
+         }
+         return html+'</ul>';
+
+      }
+
+
+    script(src='/scripts/auth.js')

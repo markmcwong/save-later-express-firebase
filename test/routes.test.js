@@ -1,10 +1,8 @@
 import request from 'supertest';
 import app from '../src/app.js';
-import test from '../model/test.js';
 
 describe('GET /', () => {
   it('should render properly', async () => {
-    const testing = test();
     await request(app).get('/').expect(200);
   });
 });

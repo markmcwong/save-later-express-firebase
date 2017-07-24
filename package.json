@@ -41,13 +41,16 @@
     "express": "^4.15.2",
     "hjs": "0.0.6",
     "mkdirp": "^0.5.1",
+    "mongo-oplog": "^2.0.2",
     "mongodb": "^2.2.30",
     "morgan": "^1.7.0",
     "node-sass": "^4.5.3",
     "node-sass-middleware": "^0.11.0",
     "pug": "^2.0.0-beta11",
     "request": "^2.81.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "semantic-ui": "^2.2.11",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "babel-jest": "^20.0.0",
